@@ -1,0 +1,4 @@
+ClientID: cTj9CJ7ev5hnHb4dsgdX
+Client Secret: DgiKpqs83X
+
+네이버 API를 호출할 때 클라이언트 아이디와 클라이언트 시크릿 값을 HTTP 헤더에 포함해서 전송해야 API를 호출할 수 있습니다.
