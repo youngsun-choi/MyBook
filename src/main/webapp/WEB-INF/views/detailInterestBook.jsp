@@ -36,7 +36,7 @@
 <body>
 	<div class="wrapper">
 		<div style="z-index:500">
-	        <a href="${pageContext.request.contextPath}/otherInterestBook" class="brand-logo-main" >
+	        <a href="${pageContext.request.contextPath}/otherInterestBook?email=<%= request.getParameter("email")%>" class="brand-logo-main" >
 				<div class="container">
 					<div class="row mt-2 pl-1" id="tooltip" style="width: 50px;">
 						<div class="col-sm-auto pl-1">

@@ -164,7 +164,6 @@
 			<script>
 				function makeDiv() {
 					var total = '${total}';
-					console.log('토탈', total);
 					if(total%4 > 0) {
 						var rows = parseInt(total/4)+1;	
 					} else {
@@ -212,16 +211,17 @@
 		        }, 200);
 		      }) 
 		
-		      image.click({bookNum: vo_id, bookTitle: vo_title, image: vo_img}, interestForm);
-		
-		      function interestForm(e, bookNum, bookTitle, image) {
+		      image.click({bookNum: vo_id, bookTitle: vo_title, image: vo_img, email: '<%= request.getParameter("email")%>'}, interestForm);
+	
+		      function interestForm(e, bookNum, bookTitle, image, email) {
 		        $.ajax({
 		          url: "detailInterestBook",
-		          type: 'POST', 
+		          type: 'GET', 
 		          data: {
 		            bookNum : e.data.bookNum,
 		            bookTitle : e.data.bookTitle,
-		            image : e.data.image
+		            image : e.data.image,
+		            email : e.data.email
 		          },
 		          dataType : "text",
 		          success: function(data){           
