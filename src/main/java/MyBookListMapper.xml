@@ -67,10 +67,9 @@
  	</select>
 	
 	<!-- log -->
-	<select id="selectLog" resultType="model.Log">
-    	select l.email email, t.userName userName, myBookTitle, interestBookTitle, 
-    	m_star, m_content, isupdate, logregistdate from log l, tbl_member t where l.email = t.userId order by logregistdate desc
- 	</select>
+	<select id="selectLog" resultType="model.Log"><!--selectLog 변경-->
+		select email, userName, myBookTitle, interestBookTitle, m_star, m_content, isupdate, logregistdate from log order by logregistdate desc
+	</select>
  	
 	<insert id="insertLog"  parameterType="model.Log">
 		<selectKey resultType="int" keyProperty="id" order="BEFORE">
@@ -89,9 +88,26 @@
 		where id=#{id}
 	</update>
 	
+	<update id="updateUserName" parameterType="model.Log">
+		update log set 
+				userName=#{userName}
+		where email=#{email}
+	</update>
+	
 	<delete id="deleteLog" parameterType="int">
 		delete from log where id = #{id} 
 	</delete> 
+	
+	<!-- 모든 활동기록 -->
+	<select id="selectTotalLog" parameterType="model.Log" resultType="model.Log"><!--selectLog 변경-->
+		select email, userName, myBookTitle, interestBookTitle, m_star, m_content, isupdate, logregistdate from (select email, userName, myBookTitle, interestBookTitle, 
+		m_star, m_content, isupdate, logregistdate, rownum rnum from (select * from log order by logregistdate desc))
+		where rnum between #{start} and #{last}
+	</select>
+	
+	<select id="totalCntLog" resultType="int">
+		select count(*) from log
+	</select>
 	
 	<!-- interestBook -->
 	 <select id="searchInterestbook"  parameterType="string" resultType="model.InterestBookList">

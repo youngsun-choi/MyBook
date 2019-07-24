@@ -183,7 +183,7 @@
 			           				<form action="otherReadBook" method="get">
 				               			<input type="hidden" name="email" value="${vo.email}">
 				           				<input id="userNameCss" type="submit" value="${vo.userName}">
-				           				&emsp;<span> ${vo.logregistdate}</span>
+				           				&emsp;<span>${vo.logregistdate}</span>
 			           				</form><br> 
 			           				<span style="font-weight: bold; word-break: keep-all ;">${vo.myBookTitle}</span>
 				           			<c:if test="${empty vo.isupdate}">
@@ -204,7 +204,7 @@
 			           				<form action="otherInterestBook" method="get">
 				               				<input type="hidden" name="email" value="${vo.email}">
 				           					<input id="userNameCss" type="submit" value="${vo.userName}">
-				           					&emsp;<span> ${vo.logregistdate}</span>
+				           					&emsp;<span>${vo.logregistdate}</span>
 			           				</form><br> 
 
 		           					<span style="font-weight: bold; word-break: keep-all ;">${vo.interestBookTitle}</span>

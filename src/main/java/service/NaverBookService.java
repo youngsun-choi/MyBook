@@ -186,7 +186,7 @@ public class NaverBookService {
 	}
 	
 	//log
-	public List<Log> selectLog(){
+	public List<Log> selectLog(){ //메인페이지 활동로그
 		List<Log> list = null;
 		String statement = "resource.MyBookListMapper.selectLog";
 		list = session.selectList(statement);
@@ -205,6 +205,14 @@ public class NaverBookService {
 		boolean result=true;
 		String statement = "resource.MyBookListMapper.updateLog";
 		if(session.update(statement, vo) != 1)
+			result = false;
+		return result;
+	}
+	
+	public boolean updateUserName(Log vo) {
+		boolean result=true;
+		String statement = "resource.MyBookListMapper.updateUserName";
+		if(session.delete(statement,vo) != 1)
 			result = false;
 		return result;
 	}
@@ -269,9 +277,22 @@ public class NaverBookService {
 			return list;
 		}
 
+	//페이징
 	public int getTotalCnt(String userId) {
 		String statement = "resource.MyBookListMapper.totalCnt";
 		return session.selectOne(statement, userId);
+	}
+	
+	public List<Log> selectTotalLog(Log model){ //전체 활동로그
+		List<Log> list = null;
+		String statement = "resource.MyBookListMapper.selectTotalLog";
+		list = session.selectList(statement, model);
+		return list;
+	}
+	
+	public int getTotalCntLog() {
+		String statement = "resource.MyBookListMapper.totalCntLog";
+		return session.selectOne(statement);
 	}
 }
 

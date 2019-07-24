@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import model.Log;
 import model.MyBookList;
 import service.MemberService;
 import service.NaverBookService;
@@ -104,10 +105,19 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/allLog")
-	public ModelAndView allLog() {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("listLog", serviceBook.selectLog()); 
-		mav.setViewName("allLog");
+	public ModelAndView allLog(@ModelAttribute Log model, @RequestParam(defaultValue="1")int curPage) {
+			ModelAndView mav = new ModelAndView();
+			//selectAll & paging
+			int listCnt = serviceBook.getTotalCntLog(); //전체 리스트 개수
+			System.out.println("listCnt :"+serviceBook.getTotalCntLog());
+			PagingVO pageList = new PagingVO(listCnt, curPage);
+			model.setStart(pageList.getStartIndex());
+			model.setLast(pageList.getEndIndex());
+			mav.addObject("list", serviceBook.selectTotalLog(model));
+			System.out.println("list :"+serviceBook.selectTotalLog(model));
+			mav.addObject("listCnt", listCnt);
+			mav.addObject("pagination", pageList);				
+			mav.setViewName("allLog");
 		return mav;
 	}
 	
@@ -201,12 +211,16 @@ public class MemberController {
 	
 	// 회원 수정
 	@RequestMapping(value="/myPage", method=RequestMethod.POST)
-	public ModelAndView infoUpdate(@ModelAttribute MemberVO vo, @SessionAttribute("status")MemberVO member) throws Exception {
+	public ModelAndView infoUpdate(@ModelAttribute MemberVO vo, @SessionAttribute("status")MemberVO member, Log model) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String userId = member.getUserId();
 		vo.setUserId(userId);
 		vo.setUserPass(passwordEncoder.encode(vo.getUserPass()));
 		boolean result = service.updateMember(vo);
+		//log테이블 userName 수정
+		model.setEmail(userId);
+		model.setUserName(vo.getUserName());
+		serviceBook.updateUserName(model);
 		if(result) {
 			member = vo;
 			mav.addObject("status", member);

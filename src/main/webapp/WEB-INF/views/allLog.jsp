@@ -142,12 +142,11 @@
                <span>MENU</span>
             </button>
            		
-            <h2>활동기록</h2>
+            <h2 style="font-size: 28px; font-weight: 700; color: #58C9B9;">전체 활동로그</h2>
             	 <br>
-	            <c:if test="${ !empty listLog }">
+	            <c:if test="${ !empty list }">
 					<ul>
-		           		<c:forEach var="vo" items="${listLog}" varStatus="status">
-			           		<%-- <c:if test="${status.count <6}"> --%>
+		           		<c:forEach var="vo" items="${list}" varStatus="status">
 			           			<div id="row">    
 			           				<c:if test="${!empty vo.myBookTitle}">
 			           					<form action="otherReadBook" method="post">
@@ -177,11 +176,43 @@
 				           				<span style="word-break: keep-all ;"> 책을 관심책에 담았습니다.</span><br>
 			           				</c:if>	
 								<div class="line"></div>
-							<%-- </c:if> --%>
 						 </c:forEach>
+						 
+						 <!-- 페이징 버튼 위치 시작 -->
+						<c:if test="${!empty listCnt }">
+							<div>
+								<c:if test="${pagination.curPage ne 1 }">
+									<a href="#" onClick="fn_paging(1)">[처음]</a>
+								</c:if>
+								<c:if test="${pagination.curPage ne 1}">
+									<a href="#" onClick="fn_paging('${pagination.prevPage }')">[이전]</a>
+								</c:if>
+								<c:forEach var="pageNum" begin="${pagination.startPage }"
+									end="${pagination.endPage }">
+									<c:choose>
+										<c:when test="${pageNum eq  pagination.curPage}">
+											<span style="font-weight: bold;"><a href="#"
+												onClick="fn_paging('${pageNum }')">${pageNum }</a></span>
+										</c:when>
+										<c:otherwise>
+											<a href="#" onClick="fn_paging('${pageNum }')">${pageNum }</a>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+								<c:if
+									test="${pagination.curPage ne pagination.pageCnt && pagination.pageCnt > 0}">
+									<a href="#" onClick="fn_paging('${pagination.nextPage }')">[다음]</a>
+								</c:if>
+								<c:if test="${pagination.curPage ne pagination.pageCnt }">
+									<a href="#" onClick="fn_paging('${pagination.pageCnt }')">[끝]</a>
+								</c:if>
+							</div>
+						</c:if>
+					<!-- 페이징 버튼 위치 종료 -->
+						 
 					 </ul>
 				 </c:if>
-				 <c:if test="${ empty listLog }">
+				 <c:if test="${ empty list }">
 				 	<div>활동기록이 없습니다.</div>
 				 	<div class="line"></div>
 				 </c:if>
@@ -215,7 +246,10 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js">
 	</script>
     <script type="text/javascript">
-    	
+    function fn_paging(curPage) {
+    	location.href = "/book/allLog?curPage=" + curPage;
+    }
+    
         $(document).ready(function () {
         	// hide sidebar when refresh the page
             $('#sidebar').toggleClass('active');
