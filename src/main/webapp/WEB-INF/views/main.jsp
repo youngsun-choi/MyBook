@@ -216,7 +216,7 @@
 								<div class="line"></div>
 							</c:if>
 						 </c:forEach>
-					 <form style="text-align: right;" action="allLog" method="post"> 	
+					 <form style="text-align: right;" action="allLog" method="get"> 	
 				     	<button type="submit" class="btn btn-outline-secondary">모든 활동기록 보기 ></button>
 				     </form>
 				 </c:if>

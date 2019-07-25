@@ -29,14 +29,6 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 	<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
-<style>
-	#userNameCss{
-		font-weight: bold; 
-		border:none; 
-		background-color: #58C9B9; 
-		color: #fff;
-	}
-</style>
 </head>
 
 <body>
@@ -149,7 +141,7 @@
 		           		<c:forEach var="vo" items="${list}" varStatus="status">
 			           			<div id="row">    
 			           				<c:if test="${!empty vo.myBookTitle}">
-			           					<form action="otherReadBook" method="post">
+			           					<form action="otherReadBook" method="get">
 				               				<input type="hidden" name="email" value="${vo.email}">
 				           					<input id="userNameCss" type="submit" value="${vo.userName}">
 				           					&emsp;<span> ${vo.logregistdate}</span>
@@ -167,7 +159,7 @@
 										<div style="word-break: keep-all ;">${vo.m_content}</div>
 			           				</c:if> 
 			           				<c:if test="${empty vo.myBookTitle}">
-			           					<form action="otherInterestBook" method="post">
+			           					<form action="otherInterestBook" method="get">
 				               				<input type="hidden" name="email" value="${vo.email}">
 				           					<input id="userNameCss" type="submit" value="${vo.userName}">
 				           					&emsp;<span> ${vo.logregistdate}</span>
@@ -180,7 +172,7 @@
 						 
 						 <!-- 페이징 버튼 위치 시작 -->
 						<c:if test="${!empty listCnt }">
-							<div>
+							<div id="paging">
 								<c:if test="${pagination.curPage ne 1 }">
 									<a href="#" onClick="fn_paging(1)">[처음]</a>
 								</c:if>
