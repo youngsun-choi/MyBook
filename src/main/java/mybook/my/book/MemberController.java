@@ -109,12 +109,10 @@ public class MemberController {
 			ModelAndView mav = new ModelAndView();
 			//selectAll & paging
 			int listCnt = serviceBook.getTotalCntLog(); //전체 리스트 개수
-			System.out.println("listCnt :"+serviceBook.getTotalCntLog());
 			PagingVO pageList = new PagingVO(listCnt, curPage);
 			model.setStart(pageList.getStartIndex());
 			model.setLast(pageList.getEndIndex());
 			mav.addObject("list", serviceBook.selectTotalLog(model));
-			System.out.println("list :"+serviceBook.selectTotalLog(model));
 			mav.addObject("listCnt", listCnt);
 			mav.addObject("pagination", pageList);				
 			mav.setViewName("allLog");

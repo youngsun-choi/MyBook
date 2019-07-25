@@ -7,7 +7,8 @@
 	<!-- readBook -->	
 	 <!-- search readBook -->
 	 <select id="searchBookList"  parameterType="string" resultType="model.MyBookList">
-    	select id, email, title, author, publisher, image, m_title, m_star, m_content, registdate from mybooklist where email = #{email} and (title like '%'||#{readkeyword}||'%' or author like '%'||#{readkeyword}||'%' or publisher like '%'||#{readkeyword}||'%')
+    	select id, email, title, author, publisher, image, m_title, m_star, m_content, registdate from mybooklist where email = #{email} 
+    	and (title like '%'||#{readkeyword}||'%' or author like '%'||#{readkeyword}||'%' or publisher like '%'||#{readkeyword}||'%')
     </select>
     
  	<!--rownum을 이용하여 id시퀀스 번호만큼 추출  -->
