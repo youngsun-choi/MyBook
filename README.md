@@ -5,4 +5,4 @@
 
 사용자들이 많이 읽은 트렌드한 책 정보와 활동로그를 확인할 수 있습니다. 
 
-![read](C:\Users\student\Desktop\read.PNG)
+![read](./image/read.PNG)
