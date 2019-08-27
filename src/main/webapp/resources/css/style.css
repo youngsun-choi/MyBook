@@ -280,6 +280,10 @@ body > div#content{
 	color: #fff;
 }
 
+#paging{
+	text-align: center;
+}
+
 .highlight {
     position: relative;
     display: inline-block;

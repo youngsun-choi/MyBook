@@ -79,8 +79,8 @@ public class PagingVO {
 
 	public void rangeSetting(int curPage){
 	    setCurRange(curPage);        
-	    this.startPage = (curRange - 1) * rangeSize + 1;
-	    this.endPage = startPage + rangeSize - 1;
+	    this.startPage = (curRange - 1) * rangeSize + 1; //블럭의 시작 페이지
+	    this.endPage = startPage + rangeSize - 1; //블럭의 끝 페이지
 	    
 	    if(endPage > pageCnt){
 	        this.endPage = pageCnt;
@@ -134,14 +134,14 @@ public class PagingVO {
 	}
 
 	public void setPageCnt(int listCnt) {
-		this.pageCnt = (int) Math.ceil(listCnt*1.0/pageSize);
+		this.pageCnt = (int) Math.ceil(listCnt*1.0/pageSize); //전체 페이지 수 계산
 	}
 
 	public int getRangeCnt() {
 		return rangeCnt;
 	}
 
-	public void setRangeCnt(int pageCnt) {
+	public void setRangeCnt(int pageCnt) { //전체 블럭수 계산
 		 this.rangeCnt = (int) Math.ceil(pageCnt*1.0/rangeSize);
 	}
 

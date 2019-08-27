@@ -176,7 +176,7 @@
 					</c:forEach>
 									<!-- 페이징 버튼 위치 시작 -->
 				<c:if test="${!empty listCnt }">
-					<div>
+					<div id="paging">
 						<c:if test="${pagination.curPage ne 1 }">
 							<a href="#" onClick="fn_paging(1)">[처음]</a>
 						</c:if>
